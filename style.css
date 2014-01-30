@@ -1,0 +1,30 @@
+
+.tile
+{
+border-color:gray;
+border-width:2px;
+border-style:solid;
+width:200px;
+height:200px;
+display:inline-block;
+float:left;
+}
+
+.wrapper
+{
+width:620px;
+}
+
+.xtile
+{
+/*  background-color:lightgray;
+*/
+  background-image:url('pirate.jpeg');
+}
+
+.otile
+{
+/*  background-color:teal;
+*/
+  background-image: url('cupcake_roar.jpg');
+}
