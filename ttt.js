@@ -5,8 +5,7 @@
     this.player = Game.marks[0];
     this.board = this.makeBoard();
   };
-  // change this to colors
-  Game.marks = ["x", "o"];
+  Game.marks = ["orange", "blue"];
 
   Game.prototype.makeBoard = function () {
     return _.times(9, function (i) {
@@ -22,10 +21,10 @@
   Game.prototype.switchPlayer = function () {
     if (this.player === Game.marks[0]) {
       this.player = Game.marks[1];
-      $("#curr-player").text("Y's turn")
+      $("#curr-player").text("blue's turn")
     } else {
       this.player = Game.marks[0];
-      $("#curr-player").text("X's turn")
+      $("#curr-player").text("orange's turn")
     }
   };
 
@@ -40,7 +39,7 @@
 		$(event.currentTarget).off("click");
 		this.placeMark(event.currentTarget.id);
 		this.switchPlayer();
-    // need to do a check if all tiles are filled
+
 		if (this.winner()) {
 			alert(this.winner() + " won!");
 			this.gameOverClicks();
@@ -67,7 +66,7 @@
 	}
 
 	Game.prototype.changeTileColor = function(tile) {
-		if(this.player === "x") {
+		if(this.player === "blue") {
 			$(tile).addClass('xtile');
 		}
 		else {

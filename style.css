@@ -2,29 +2,36 @@
 .tile
 {
 border-color:gray;
-border-width:2px;
-border-style:solid;
-width:200px;
-height:200px;
+border-width:1px;
+border-style:dashed;
+width:150px;
+height:150px;
 display:inline-block;
 float:left;
 }
 
 .wrapper
 {
-width:620px;
+  margin-left: 10px;
+  width:470px;
 }
 
 .xtile
 {
-/*  background-color:lightgray;
-*/
-  background-image:url('pirate.jpeg');
+  border-color: #6699FF;
+  border-style:solid;
+  border-width:1px;
+  background-image:url('blue.jpg');
 }
 
 .otile
 {
-/*  background-color:teal;
-*/
-  background-image: url('cupcake_roar.jpg');
+  background-image: url('orange.jpg');
+  border-color: orange;
+  border-style:solid;
+  border-width:1px;
+}
+
+body {
+  font-family: Helvetica;
 }
