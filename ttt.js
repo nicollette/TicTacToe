@@ -15,7 +15,6 @@
 
 	Game.prototype.placeMark = function(tile_id) {
 		this.board[parseInt(tile_id)] = this.player;
-		console.log(this.board);
 	};
 
   Game.prototype.switchPlayer = function () {
