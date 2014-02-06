@@ -1,7 +1,7 @@
 
 .tile
 {
-border-color:gray;
+border-color:white;
 border-width:1px;
 border-style:dashed;
 width:150px;
@@ -34,4 +34,13 @@ float:left;
 
 body {
   font-family: Helvetica;
+  background-color:#00828b;
+  color:white;
+  position:absolute;
+  left:20%;
+  top:5%;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+#instructions {
+  color:orange;
 }
