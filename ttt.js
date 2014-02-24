@@ -1,5 +1,5 @@
 (function(root) {
-	var TTT = root.TTT = root.TTT || {};
+	var TTT = root.TTT = (root.TTT || {});
 
   var Game = TTT.Game = function () {
     this.player = Game.marks[0];
