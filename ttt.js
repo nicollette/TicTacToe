@@ -1,9 +1,14 @@
 (function(root) {
 	var TTT = root.TTT = (root.TTT || {});
 
-  var Game = TTT.Game = function () {
+  var Game = TTT.Game = function (player1, player2) {
     this.board = new TTT.Board;
-    this.player = this.board.marks[0];
+    this.players = { 
+      "orange": player1,
+      "blue": player2
+    }
+    this.turn = "orange";
+    // this.player = this.board.marks[0];
   };
   // Game.marks = ["orange", "blue"];
 
@@ -13,16 +18,30 @@
   //   });
   // };
 
+  Game.prototype.run = function () {
+    this.bindClicks();
+    
+//     
+//     if (this.board.isGameWon()) {
+//         alert(this.board.winner() + " won!");
+//         this.gameOverClicks();
+//     }else {
+//         alert("Game over, no more moves left.");
+//         this.gameOverClicks();
+//     }
+  };
+  
 	Game.prototype.placeMark = function(tile_id) {
-		this.board.tiles[parseInt(tile_id)] = this.player;
+		this.board.tiles[parseInt(tile_id)] = this.turn;
+    this.switchPlayer();
 	};
 
   Game.prototype.switchPlayer = function () {
-    if (this.player === this.board.marks[0]) {
-      this.player = this.board.marks[1];
+    if (this.turn === this.board.marks[0]) {
+      this.turn = this.board.marks[1];
       $("#curr-player").text("blue's turn")
     } else {
-      this.player = this.board.marks[0];
+      this.turn = this.board.marks[0];
       $("#curr-player").text("orange's turn")
     }
   };
@@ -37,16 +56,16 @@
 		this.changeTileColor(event.currentTarget);
 		$(event.currentTarget).off("click");
 		this.placeMark(event.currentTarget.id);
-		this.switchPlayer();
-
-		if (this.board.winner()) {
-			alert(this.board.winner() + " won!");
-			this.gameOverClicks();
-		} else if (this.board.isBoardFull()) {
+    // this.switchPlayer();
+    this.players[this.turn].move(this);
+    
+    if (this.board.winner()) {
+      alert(this.board.winner() + " won!");
+      this.gameOverClicks();
+    } else if (this.board.isBoardFull()) {
       alert("Game over, no more moves left.");
       this.gameOverClicks();
     }
-
 	};
   
   // Game.prototype.isBoardFull = function () {
@@ -59,13 +78,23 @@
   //   
   //   return boardIsFull;
   // };
+  Game.prototype.handleComputerMove = function ($tile) {
+		if(this.turn === "blue") {
+			$tile.addClass('xtile');
+		}
+		else {
+			$tile.addClass('otile');
+		}
+    $tile.off("click");
+    this.placeMark($tile.id);
+  };
   
 	Game.prototype.gameOverClicks = function() {
 		$('.tile').off("click");
 	}
 
 	Game.prototype.changeTileColor = function(tile) {
-		if(this.player === "blue") {
+		if(this.turn === "blue") {
 			$(tile).addClass('xtile');
 		}
 		else {
@@ -165,5 +194,6 @@
 })(this);
 
 $(function () {
-	new TTT.Game($(".wrapper")).bindClicks();
+	var game = new TTT.Game(new TTT.HumanPlayer, new TTT.ComputerPlayer);
+  game.run();
 });

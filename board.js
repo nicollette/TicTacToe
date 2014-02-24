@@ -1,17 +1,23 @@
 (function (root) {
   var TTT = root.TTT = (root.TTT || {});
   
-  var Board = TTT.Board = function () {
-    this.tiles = this.makeBoard();
+  var Board = TTT.Board = function (tiles) {
+    this.tiles = tiles || this.makeBoard();
     this.marks = ["orange", "blue"];
   }
-  
-  // Board.marks = ["orange", "blue"];
-  
+    
   Board.prototype.makeBoard = function () {
     return _.times(9, function (i) {
       return null;
     });
+  };
+  
+  Board.prototype.isGameOver = function () {
+    return this.isGameWon() || this.isBoardFull();
+  };
+  
+  Board.prototype.isGameWon = function () {
+    return !!this.winner();
   };
   
   Board.prototype.diagonalWinner = function () {
