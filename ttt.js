@@ -22,10 +22,10 @@
   Game.prototype.switchPlayer = function () {
     if (this.turn === this.board.marks[0]) {
       this.turn = this.board.marks[1];
-      $("#curr-player").text("blue's turn");
+      $("#curr-player").text("Hal's turn");
     } else {
       this.turn = this.board.marks[0];
-      $("#curr-player").text("orange's turn");
+      $("#curr-player").text("your turn");
     }
   };
 
@@ -55,18 +55,14 @@
      this.handleGameOver(); 
     }
   };
-  // Game.prototype.isGameOver = function () {
-  //   if (this.board.isGameOver()) {
-  //     return true;
-  //   }
-  // };
   
   Game.prototype.handleGameOver = function () {
     if (this.board.winner()) {
-      alert(this.board.winner() + " won!");
+      var winner = this.board.winner() == "orange" ? "you" : "Hal"
+      alert(winner + " won!");
       this.gameOverClicks();
     } else if (this.board.isBoardFull()) {
-      alert("Game over, no more moves left.");
+      alert("Game over, no one wins.");
       this.gameOverClicks();
     }
   };

@@ -21,84 +21,45 @@
   };
   
   Board.prototype.diagonalWinner = function () {
-    var board = this;
-
     var diagonalPositions1 = [0, 4, 8];
     var diagonalPositions2 = [2, 4, 6];
 
+    return this.isWinner([diagonalPositions1, diagonalPositions2]);
+  };
+  
+  Board.prototype.isWinner = function (positions) {
+    var board = this;
     var winner = null;
     _(this.marks).each(function (mark) {
-			function didWinDiagonal (diagonalPositions) {
-        return _.every(diagonalPositions, function (pos) {
-          return board.tiles[pos] === mark;
-      	});
-    	}
-
-      var won = _.any(
-        [diagonalPositions1, diagonalPositions2],
-        didWinDiagonal
-      );
-
-      if (won) {
+       function didWin (position) {
+         return _.every(position, function (pos) {
+           return board.tiles[pos] === mark;
+         });
+       }
+			
+      var won = _.any(positions, didWin);
+      
+      if(won) {
         winner = mark;
       }
     });
-
     return winner;
   };
-
+  
   Board.prototype.verticalWinner = function () {
-    var board = this;
 		var verticalPositions1 = [0, 3, 6];
 		var verticalPositions2 = [1, 4, 7];
 		var verticalPositions3 = [2, 5, 8];
 
-    var winner = null;
-    _(this.marks).each(function (mark) {
-      function didWinVertical (verticalPositions) {
-        return _.every(verticalPositions, function (pos) {
-          return board.tiles[pos] === mark;
-				});
-			}
-
-      var won = _.any(
-        [verticalPositions1, verticalPositions2, verticalPositions3],
-        didWinVertical
-      );
-
-      if (won) {
-        winner = mark;
-      }
-    });
-
-    return winner;
+    return this.isWinner([verticalPositions1, verticalPositions2, verticalPositions3])
   };
 
   Board.prototype.horizontalWinner = function () {
-    var board = this;
 		var horizontalPositions1 = [0, 1, 2];
 		var horizontalPositions2 = [3, 4, 5];
 		var horizontalPositions3 = [6, 7, 8];
 
-    var winner = null;
-    _(this.marks).each(function (mark) {
-      function didWinVertical (horizontalPositions) {
-        return _.every(horizontalPositions, function (pos) {
-          return board.tiles[pos] === mark;
-				});
-			}
-
-      var won = _.any(
-        [horizontalPositions1, horizontalPositions2, horizontalPositions3],
-        didWinVertical
-      );
-
-      if (won) {
-        winner = mark;
-      }
-    });
-
-    return winner;
+    return this.isWinner([horizontalPositions1, horizontalPositions2, horizontalPositions3])
   };
   
   Board.prototype.winner = function () {
