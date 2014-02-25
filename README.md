@@ -8,4 +8,6 @@ Highlights
 
 *   Object-oriented design.
 
-*   Uses jQuery to handle mouse-clicks and place cupcake marks.
+*   Uses jQuery to handle mouse-clicks and place marks.
+
+*   AI logic
