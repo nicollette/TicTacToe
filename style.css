@@ -18,33 +18,30 @@ float:left;
 
 .xtile
 {
-  border-color: #6699FF;
   border-style:solid;
   border-width:1px;
-  background-image:url('hal_sm2.jpg');
+  background-image:url('hal.jpg');
 }
 
 .otile
 {
-  background-image: url('cat_sm.jpeg');
-  border-color: orange;
+  background-image: url('cat.jpeg');
   border-style:solid;
   border-width:1px;
 }
 
 body {
   font-family: Helvetica;
-  background-color:#00828b;
+  background-color:black;
   color:white;
   position:absolute;
   left:20%;
   top:5%;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-body.gameover {
-  background-color:black;
-  
+.gameover {
+  background-color:#ca0000;
 }
 #instructions {
-  color:orange;
+  color:white;
 }
