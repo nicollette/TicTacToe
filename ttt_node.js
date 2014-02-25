@@ -26,6 +26,7 @@
     if (this.board.isGameOver()) {
       return this.board.isGameWon() && (this.board.winner() != evaluator);
     }
+    
     var children = this.children();
     if (this.mark == evaluator) {
       return children.every(function (child) {

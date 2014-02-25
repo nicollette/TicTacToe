@@ -1,10 +1,6 @@
 (function (root) {
 	var TTT = root.TTT = (root.TTT || {});
-  
-  var HumanPlayer = TTT.HumanPlayer = function () {
-    this.madeMove = false;
-  };
-  
+
   var ComputerPlayer = TTT.ComputerPlayer = function () {  
   };
   
@@ -19,6 +15,7 @@
     var notLoser = _.find(possibleMoves, function (child) {
       return !child.isLosingNode(mark);
     });
+    
     var bestMove = winner || notLoser || possibleMoves[(Math.floor(Math.random() * possibleMoves.length))];
     
     return bestMove.prevMovePos;

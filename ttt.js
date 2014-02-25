@@ -1,11 +1,11 @@
 (function(root) {
 	var TTT = root.TTT = (root.TTT || {});
 
-  var Game = TTT.Game = function (player1, player2) {
+  var Game = TTT.Game = function (computer) {
     this.board = new TTT.Board;
     this.players = { 
-      "orange": player1,
-      "blue": player2
+      "orange": "you",
+      "blue": computer
     }
     this.turn = "orange";
   };
@@ -60,11 +60,10 @@
     if (this.board.winner()) {
       var winner = this.board.winner() == "orange" ? "you" : "Hal"
       alert(winner + " won!");
-      this.gameOverClicks();
     } else if (this.board.isBoardFull()) {
       alert("Game over, no one wins.");
-      this.gameOverClicks();
     }
+    this.gameOverClicks();
   };
   
   Game.prototype.handleComputerMove = function ($tile) {
@@ -94,6 +93,6 @@
 })(this);
 
 $(function () {
-	var game = new TTT.Game(new TTT.HumanPlayer, new TTT.ComputerPlayer);
+	var game = new TTT.Game(new TTT.ComputerPlayer);
   game.run();
 });
