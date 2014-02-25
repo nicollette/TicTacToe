@@ -108,6 +108,7 @@
   };
   
   Board.prototype.isBoardFull = function () {
+    // use underscore to loop
     var boardIsFull = true;
     this.tiles.forEach(function (tile) {
       if (!tile) {

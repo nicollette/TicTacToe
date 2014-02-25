@@ -8,27 +8,10 @@
       "blue": player2
     }
     this.turn = "orange";
-    // this.player = this.board.marks[0];
   };
-  // Game.marks = ["orange", "blue"];
-
-  // Game.prototype.makeBoard = function () {
-  //   return _.times(9, function (i) {
-  //     return null;
-  //   });
-  // };
 
   Game.prototype.run = function () {
     this.bindClicks();
-    
-//     
-//     if (this.board.isGameWon()) {
-//         alert(this.board.winner() + " won!");
-//         this.gameOverClicks();
-//     }else {
-//         alert("Game over, no more moves left.");
-//         this.gameOverClicks();
-//     }
   };
   
 	Game.prototype.placeMark = function(tile_id) {
@@ -39,10 +22,10 @@
   Game.prototype.switchPlayer = function () {
     if (this.turn === this.board.marks[0]) {
       this.turn = this.board.marks[1];
-      $("#curr-player").text("blue's turn")
+      $("#curr-player").text("blue's turn");
     } else {
       this.turn = this.board.marks[0];
-      $("#curr-player").text("orange's turn")
+      $("#curr-player").text("orange's turn");
     }
   };
 
@@ -52,13 +35,33 @@
 
 	Game.prototype.handleTClick = function(event) {
     event.preventDefault();
-    
 		this.changeTileColor(event.currentTarget);
 		$(event.currentTarget).off("click");
 		this.placeMark(event.currentTarget.id);
-    // this.switchPlayer();
-    this.players[this.turn].move(this);
     
+    if (this.board.isGameOver()) {
+      this.handleGameOver();
+    } else {
+      this.playCompTurn();  
+    }
+	};
+  
+  Game.prototype.playCompTurn = function () {
+    var computerMove = this.players[this.turn].move(this, this.turn);
+    var $tile = $("#" + computerMove);
+    this.handleComputerMove($tile); 
+    
+    if (this.board.isGameOver()) {
+     this.handleGameOver(); 
+    }
+  };
+  // Game.prototype.isGameOver = function () {
+  //   if (this.board.isGameOver()) {
+  //     return true;
+  //   }
+  // };
+  
+  Game.prototype.handleGameOver = function () {
     if (this.board.winner()) {
       alert(this.board.winner() + " won!");
       this.gameOverClicks();
@@ -66,18 +69,8 @@
       alert("Game over, no more moves left.");
       this.gameOverClicks();
     }
-	};
+  };
   
-  // Game.prototype.isBoardFull = function () {
-  //   var boardIsFull = true;
-  //   this.board.forEach(function (tile) {
-  //     if (!tile) {
-  //       boardIsFull = false;
-  //     }
-  //   });
-  //   
-  //   return boardIsFull;
-  // };
   Game.prototype.handleComputerMove = function ($tile) {
 		if(this.turn === "blue") {
 			$tile.addClass('xtile');
@@ -86,7 +79,7 @@
 			$tile.addClass('otile');
 		}
     $tile.off("click");
-    this.placeMark($tile.id);
+    this.placeMark($tile[0].id);
   };
   
 	Game.prototype.gameOverClicks = function() {
@@ -101,95 +94,6 @@
 			$(tile).addClass('otile');
 		}
 	};
-
-  // Game.prototype.diagonalWinner = function () {
-  //   var game = this;
-  // 
-  //   var diagonalPositions1 = [0, 4, 8];
-  //   var diagonalPositions2 = [2, 4, 6];
-  // 
-  //   var winner = null;
-  //   _(Game.marks).each(function (mark) {
-  //       function didWinDiagonal (diagonalPositions) {
-  //       return _.every(diagonalPositions, function (pos) {
-  //         return game.board[pos] === mark;
-  //       });
-  //     }
-  // 
-  //     var won = _.any(
-  //       [diagonalPositions1, diagonalPositions2],
-  //       didWinDiagonal
-  //     );
-  // 
-  //     if (won) {
-  //       winner = mark;
-  //     }
-  //   });
-  // 
-  //   return winner;
-  // };
-  // 
-  // Game.prototype.verticalWinner = function () {
-  //   var game = this;
-  //     var verticalPositions1 = [0, 3, 6];
-  //     var verticalPositions2 = [1, 4, 7];
-  //     var verticalPositions3 = [2, 5, 8];
-  // 
-  //   var winner = null;
-  //   _(Game.marks).each(function (mark) {
-  //     function didWinVertical (verticalPositions) {
-  //       return _.every(verticalPositions, function (pos) {
-  //         return game.board[pos] === mark;
-  //         });
-  //       }
-  // 
-  //     var won = _.any(
-  //       [verticalPositions1, verticalPositions2, verticalPositions3],
-  //       didWinVertical
-  //     );
-  // 
-  //     if (won) {
-  //       winner = mark;
-  //     }
-  //   });
-  // 
-  //   return winner;
-  // };
-  // 
-  // Game.prototype.horizontalWinner = function () {
-  //   var game = this;
-  //     var horizontalPositions1 = [0, 1, 2];
-  //     var horizontalPositions2 = [3, 4, 5];
-  //     var horizontalPositions3 = [6, 7, 8];
-  // 
-  //   var winner = null;
-  //   _(Game.marks).each(function (mark) {
-  //     function didWinVertical (horizontalPositions) {
-  //       return _.every(horizontalPositions, function (pos) {
-  //         return game.board[pos] === mark;
-  //         });
-  //       }
-  // 
-  //     var won = _.any(
-  //       [horizontalPositions1, horizontalPositions2, horizontalPositions3],
-  //       didWinVertical
-  //     );
-  // 
-  //     if (won) {
-  //       winner = mark;
-  //     }
-  //   });
-  // 
-  //   return winner;
-  // };
-  // 
-  // Game.prototype.winner = function () {
-  //   return (
-  //     this.diagonalWinner() || this.horizontalWinner() || this.verticalWinner()
-  //   );
-  // };
-
- 
 
 })(this);
 
