@@ -1,7 +1,7 @@
-Tic-tac-toe: Cupcake Wars
+Tic-tac-toe: you vs. the AI
 =========================
 
-Classic tic-tac-toe game remixed with cute cupcake photos written in JavaScript. Can be played in the browser, click tiles to place cupcake mark. 
+Play against the our AI Hal in this classic tic-tac-toe game written in JavaScript. Can be played in the browser, click tiles to place mark. 
 
 Highlights
 ==========

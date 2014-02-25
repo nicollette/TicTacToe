@@ -39,9 +39,11 @@ body {
   top:5%;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
+
 .gameover {
   background-color:#ca0000;
 }
+
 #instructions {
   color:white;
 }
